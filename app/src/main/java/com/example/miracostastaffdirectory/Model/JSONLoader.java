@@ -1,6 +1,7 @@
 package com.example.miracostastaffdirectory.Model;
 
 import android.content.Context;
+import android.text.InputType;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -27,48 +28,87 @@ public class JSONLoader {
     public static List<StaffMember> loadJSONFromAsset(Context context) throws IOException {
         List<StaffMember> allStaffList = new ArrayList<>();
         String json = null;
+        int it=0;
+        InputStream is = null;
 
+        while (true) {
 
-        InputStream is = context.getAssets().open("AdimOfJustice.json");
+            it++;
+            switch (it) {
+                case(1):
+                    is = context.getAssets().open("AdimOfJustice.json");
+                    break;
+                case(2):
+                    is = context.getAssets().open("ArtDepartment.json");
+                    break;
+                case(3):
+                    is = context.getAssets().open("AutomotiveTechnologyDepartment.json");
+                    break;
+                case(4):
+                    is = context.getAssets().open("BiologicalScienceDepartment.json");
+                    break;
+                case(5):
+                    is = context.getAssets().open("BiotechnologyDepartment.json");
+                    break;
+                case(6):
+                    is = context.getAssets().open("BusinessDepartment.json");
+                    break;
+                case(7):
+                    is = context.getAssets().open("CareerDepartment.json");
+                    break;
+                case(8):
+                    is = context.getAssets().open("ChemistryDepartment.json");
+                    break;
+                case(9):
+                    is = context.getAssets().open("ChildDevelopmentDepartment.json");
+                    break;
+                case(10):
+                    is = context.getAssets().open("CommunicationStudiesDepartment.json");
+                    break;
+                case(11):
+                    is = context.getAssets().open("CounselingDepartment.json");
+                    break;
 
-
-        int size = is.available();
-        byte[] buffer = new byte[size];
-        is.read(buffer);
-        is.close();
-        json = new String(buffer, "UTF-8");
-
-        try {
-            JSONObject jsonRootObject = new JSONObject(json);
-            JSONArray allCountriesJSON = jsonRootObject.getJSONArray("");
-
-            // Loop through all the countries in the JSON data, create a Country
-            int numCountries = allCountriesJSON.length();
-
-            // To be used in loop
-            JSONObject countryJSON;
-            String name, title, phoneExt, location, email;
-            StaffMember sm = null;
-
-            for (int i = 0; i < numCountries; i++) {
-                countryJSON = allCountriesJSON.getJSONObject(i);
-
-                // Extract the name and region
-                name = countryJSON.getString("Name");
-                title = countryJSON.getString("Title");
-                phoneExt = countryJSON.getString("Phone");
-                location = countryJSON.getString("Location");
-                email = countryJSON.getString("Email");
-
-                // Add object for each and add the object to the allCountriesList
-                sm = new StaffMember(name, title, phoneExt, location, email);
-                allStaffList.add(sm);
             }
 
 
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
 
-        } catch (JSONException e) {
-            Log.e("Flag Quiz", e.getMessage());
+            try {
+                JSONObject jsonRootObject = new JSONObject(json);
+                JSONArray allCountriesJSON = jsonRootObject.getJSONArray("");
+
+                // Loop through all the countries in the JSON data, create a Country
+                int numCountries = allCountriesJSON.length();
+
+                // To be used in loop
+                JSONObject countryJSON;
+                String name, title, phoneExt, location, email;
+                StaffMember sm = null;
+
+                for (int i = 0; i < numCountries; i++) {
+                    countryJSON = allCountriesJSON.getJSONObject(i);
+
+                    // Extract the name and region
+                    name = countryJSON.getString("Name");
+                    title = countryJSON.getString("Title");
+                    phoneExt = countryJSON.getString("Phone");
+                    location = countryJSON.getString("Location");
+                    email = countryJSON.getString("Email");
+
+                    // Add object for each and add the object to the allCountriesList
+                    sm = new StaffMember(name, title, phoneExt, location, email);
+                    allStaffList.add(sm);
+                }
+
+
+            } catch (JSONException e) {
+                Log.e("Flag Quiz", e.getMessage());
+            }
         }
 
         return allStaffList;
