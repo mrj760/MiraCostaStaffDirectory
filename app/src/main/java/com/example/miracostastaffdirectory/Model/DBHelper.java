@@ -16,11 +16,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     /** Define all database info in constants */
-    public static final String DATABASE_NAME = "ToDo2Day";
-    public static final String DATABASE_TABLE = "Tasks";
+    public static final String DATABASE_NAME = "MiracostaStaffDirectory";
+    public static final String DATABASE_TABLE = "Staff";
     public static final String FIELD_PRIMARY_KEY = "_id";
-    public static final String FIELD_DESCRIPTION = "description";
-    public static final String FIELD_IS_DONE = "is_done";
+    public static final String FIELD_NAME = "name";
+    public static final String FIELD_TITLE = "title";
 
 
 
@@ -45,8 +45,8 @@ public class DBHelper extends SQLiteOpenHelper {
         // this string will be used as a sql command
         String sql = (     "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " ( "    +
                 FIELD_PRIMARY_KEY + " INTEGER PRIMARY KEY , "             +
-                FIELD_DESCRIPTION + "TEXT, "                               +
-                FIELD_IS_DONE + "INTEGER" + ")"                           );
+                FIELD_NAME + "TEXT, "                               +
+                FIELD_TITLE + "TEXT" + ")"                           );
 
         // run that string command here
         db.execSQL(sql);
@@ -71,40 +71,42 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public void addTask(Task t) {
+    public void addStaff(StaffMember sm) {
 
-        String desc = t.getDescription();
-        boolean isDone = t.isDone();
+        String name = sm.getName();
+        String title = sm.getTitle();
+        String phone = sm.getPhoneExt();
+        String location = sm.getLocation();
+        String email = sm.getEmail();
 
         SQLiteDatabase db = getWritableDatabase();
 
         // make this set of 'key / value' pairs for our database to insert
         ContentValues values = new ContentValues();
         // add each to the list above
-        values.put(FIELD_DESCRIPTION, desc);
-        values.put(FIELD_IS_DONE, isDone? 1: 0);
+        values.put(FIELD_NAME, name);
+        values.put(FIELD_TITLE, title);
 
         // then add the 2 items that are stored in the ContentValues to the database to make one new record
         // also doing this returns a long ( the id val from the database) so we'll set that objects id in java too
         long id = db.insert(DATABASE_TABLE, null, values);
-        t.setId(id);
 
         // close this bitch up
         db.close();
 
     }
 
-    public List<Task> getAllTasks() {
+    public List<StaffMember> getAllTasks() {
 
         // make empty list
-        List<Task> taskList= new ArrayList<>();
+        List<StaffMember> taskList= new ArrayList<>();
 
         // fill it from data from the database records ... readable this time since we're just reading info
         SQLiteDatabase db = getReadableDatabase();
 
         // Query results in SQLite are called cursors, so lets get them
         Cursor cursor  = db.query(DATABASE_TABLE,
-                new String[]{FIELD_PRIMARY_KEY, FIELD_DESCRIPTION, FIELD_IS_DONE},
+                new String[]{FIELD_PRIMARY_KEY, FIELD_NAME, FIELD_TITLE},
                 null,
                 null,
                 null,
@@ -119,11 +121,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
             do {
 
-                Task t = new Task(cursor.getLong(0),
+                StaffMember sm = new StaffMember(cursor.getString(0),
                         cursor.getString(1),
-                        cursor.getInt(3)==1);
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5)
+                        );
 
-                taskList.add(t);
+                taskList.add(sm);
 
             } while (cursor.moveToNext());
 
