@@ -7,26 +7,34 @@
     tools:context=".Departments">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/departments"
         android:layout_width="370dp"
         android:layout_height="538dp"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="84dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="350dp"
         android:layout_height="75dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/homeButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:onClick="goHome"
             android:text="@string/home" />
 
@@ -35,14 +43,16 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:gravity="center"
+            android:text="@string/departments" />
 
         <TextView
             android:id="@+id/allStaffButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:gravity="center"
+            android:text="@string/all_staff" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
