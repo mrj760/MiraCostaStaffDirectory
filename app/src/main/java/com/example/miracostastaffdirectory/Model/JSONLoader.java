@@ -31,6 +31,7 @@ public class JSONLoader {
         int it=0;
         InputStream is = null;
 
+        ReadJSONLoop:
         while (true) {
 
             it++;
@@ -68,7 +69,68 @@ public class JSONLoader {
                 case(11):
                     is = context.getAssets().open("CounselingDepartment.json");
                     break;
-
+                case(12):
+                    is = context.getAssets().open("CSDepartment.json");
+                    break;
+                case(13):
+                    is = context.getAssets().open("CSITDepartment.json");
+                    break;
+                case(14):
+                    is = context.getAssets().open("DanceDepartment.json");
+                    break;
+                case(15):
+                    is = context.getAssets().open("DesignDepartment.json");
+                    break;
+                case(16):
+                    is = context.getAssets().open("EnglishDepartment.json");
+                    break;
+                case(17):
+                    is = context.getAssets().open("ESLDepartment.json");
+                    break;
+                case(18):
+                    is = context.getAssets().open("HistoryDepartment.json");
+                    break;
+                case(19):
+                    is = context.getAssets().open("HorticultureDepartment.json");
+                    break;
+                case(20):
+                    is = context.getAssets().open("IMTDDepartment.json");
+                    break;
+                case(21):
+                    is = context.getAssets().open("InternationalLanguagesDepartment.json");
+                    break;
+                case(22):
+                    is = context.getAssets().open("KinesiologyDepartment.json");
+                    break;
+                case(23):
+                    is = context.getAssets().open("LibraryScienceDepartment.json");
+                    break;
+                case(24):
+                    is = context.getAssets().open("MathDepartment.json");
+                    break;
+                case(25):
+                    is = context.getAssets().open("MusicDepartment.json");
+                    break;
+                case(26):
+                    is = context.getAssets().open("NursingDepartment.json");
+                    break;
+                case(27):
+                    is = context.getAssets().open("PhilosophyAndReligiousDepartment.json");
+                    break;
+                case(28):
+                    is = context.getAssets().open("PhysicalScienceDepartment.json");
+                    break;
+                case(29):
+                    is = context.getAssets().open("PsychologyDepartment.json");
+                    break;
+                case(30):
+                    is = context.getAssets().open("SociologyDepartment.json");
+                    break;
+                case(31):
+                    is = context.getAssets().open("TheatreAndFilmDepartment.json");
+                    break;
+                default:
+                    break ReadJSONLoop;
             }
 
 
